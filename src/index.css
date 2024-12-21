@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background: #ffd3a1;
+}
+
 body {
   height: 100vh;
   background: url('/mountains.svg') no-repeat center;
