@@ -10,6 +10,7 @@ export default defineConfig({
       '@app': path.resolve(__dirname, './src/app'),
       '@core': path.resolve(__dirname, './src/core'),
       '@libs': path.resolve(__dirname, './src/libs'),
+      '@ui': path.resolve(__dirname, './src/ui'),
     },
   },
 });

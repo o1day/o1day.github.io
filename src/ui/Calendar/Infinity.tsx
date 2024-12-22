@@ -1,8 +1,8 @@
 import {useState, useLayoutEffect, useRef} from 'react';
 import {getNextMonth, getPrevMonth} from '@libs/rh-calendar/utils.ts';
-import {Month} from '@core/components/Month.tsx';
+import {Month} from './Month.tsx';
 
-export const Calendar: React.FC = () => {
+export const InfinityCalendar: React.FC = () => {
   const dateFormat = Intl.DateTimeFormat(navigator.language, {month: 'long', year: 'numeric'});
   const [months, setMonths] = useState([getPrevMonth(), new Date(), getNextMonth()]);
 
@@ -29,10 +29,7 @@ export const Calendar: React.FC = () => {
   return (
     <div ref={calendarRef} className={'max-h-full overflow-scroll'}>
       {months.map((date, idx) => (
-        <div
-          ref={idx == 1 ? currentRef : undefined}
-          key={`${date.getFullYear().toString()}-${date.getMonth().toString()}`}
-        >
+        <div ref={idx == 1 ? currentRef : undefined} key={String(date)}>
           <p className={'sticky top-0 p-xs bg-buccaneer-500 bg-opacity-20 rounded'}>
             {dateFormat.format(date)}
           </p>
