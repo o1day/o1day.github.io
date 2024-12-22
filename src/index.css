@@ -12,6 +12,6 @@ body {
   background-size: cover;
 }
 
-#root {
+#app {
   height: 100vh;
 }

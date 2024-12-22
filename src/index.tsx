@@ -2,14 +2,25 @@ import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 
 import './index.css';
-import {App} from './app/App.tsx';
+import {App} from './app/App';
+import {Auth} from './auth/Auth.tsx';
 
-const container = document.querySelector('#root');
+const container = document.querySelector('#app');
+const reactRoot = createRoot(container ?? document.body);
+const isAuth = window.location.pathname.startsWith('/auth/');
 
 if (container) {
-  createRoot(container).render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  );
+  if (isAuth) {
+    reactRoot.render(
+      <StrictMode>
+        <Auth />
+      </StrictMode>,
+    );
+  } else {
+    reactRoot.render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    );
+  }
 }
