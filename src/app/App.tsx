@@ -1,38 +1,29 @@
-import {useState} from 'react';
+import {useMemo} from 'react';
+import {YandexAuth} from '@cloud/yandex/Auth';
+import {useLocalStorage} from '@core/hooks/useLocalStorage';
 
-import {InfinityCalendar, WeekHeader} from '@ui/Calendar';
-import {useStorage} from '@core/hooks/useStorage';
-import {YandexId} from '@libs/yandex-id';
-
-import {AppContext, TAppContext, TAuth} from './context/AppContext';
-import {Layout, Header} from './views';
+import {CloudContext, createContextByAccess, emptyAccess} from './context/CloudContext';
+import type {TCloudAccess, TCloudContext} from './context/CloudContext';
+import {Calendar} from './pages/Calendar';
+import {Profile} from './widgets/Profile';
+import {Header, Layout} from './views';
 
 export const App: React.FC = () => {
-  const [auth, saveAuth] = useStorage<TAuth>('auth', true);
-  const [appContext, setAppContext] = useState<TAppContext>({auth: auth ?? undefined});
+  const [access, saveAccess] = useLocalStorage<TCloudAccess>('cloud_access', true, emptyAccess);
+  const cloudContext = useMemo<TCloudContext>(() => createContextByAccess(access), [access]);
 
-  const setAuth = (auth: TAuth) => {
-    setAppContext((context) => ({...context, auth}));
-    saveAuth(auth);
+  const onAccess = (provider: TCloudProvider) => (credentials: unknown) => {
+    saveAccess({provider, credentials});
   };
 
   return (
     <Layout>
-      <AppContext.Provider value={appContext}>
+      <CloudContext.Provider value={cloudContext}>
         <Header>
-          {auth ? (
-            <div className={'h-10 w-10 bg-buccaneer-500 bg-opacity-40 rounded-full'}>
-              <h1 className={'text-3xl text-center p-xs'}>🐼</h1>
-            </div>
-          ) : (
-            <>
-              <YandexId setAuth={setAuth} />
-            </>
-          )}
+          {access.provider !== 'empty' ? <Profile /> : <YandexAuth onAccess={onAccess('yandex')} />}
         </Header>
-        <WeekHeader />
-        <InfinityCalendar />
-      </AppContext.Provider>
+        <Calendar />
+      </CloudContext.Provider>
     </Layout>
   );
 };

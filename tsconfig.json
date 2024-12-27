@@ -25,6 +25,7 @@
     "baseUrl": "./src",
     "paths": {
       "@app/*": ["app/*"],
+      "@cloud/*": ["cloud/*"],
       "@core/*": ["core/*"],
       "@libs/*": ["libs/*"],
       "@ui/*": ["ui/*"]

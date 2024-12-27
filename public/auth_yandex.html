@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/calendar.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-token-latest.js"></script>
+  <style>
+    html {
+      font-family: -apple-system, sans-serif;
+    }
+
+    html, body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .waiting {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+  <title>Yandex Result</title>
+</head>
+<body>
+<script>
+  window.onload = () => window.YaSendSuggestToken(origin);
+</script>
+<div class="waiting">
+  <img alt="Waiting" src="/spinner.svg" width="48" height="48">
+  <span>Authorization...</span>
+</div>
+</body>
+</html>
