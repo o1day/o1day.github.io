@@ -1,10 +1,15 @@
 import {useState, useLayoutEffect, useRef} from 'react';
 
+import {HeadlessCalendar} from './Headless.tsx';
 import {getNextMonth, getPrevMonth} from './utils.ts';
-import {MonthCalendar} from './Month.tsx';
 
-export const InfinityCalendar: React.FC = () => {
-  const dateFormat = Intl.DateTimeFormat(navigator.language, {month: 'long', year: 'numeric'});
+type TProps = {
+  Month: React.FC<React.PropsWithChildren<{ref: React.Ref<HTMLElement>; date: Date}>>;
+  Week: React.FC<React.PropsWithChildren>;
+  children: React.FC<Date>;
+};
+
+export const InfinityCalendar: React.FC<TProps> = ({Month, Week, children}) => {
   const [months, setMonths] = useState([getPrevMonth(), new Date(), getNextMonth()]);
 
   const currentRef = useRef<HTMLDivElement>(null);
@@ -36,12 +41,9 @@ export const InfinityCalendar: React.FC = () => {
   return (
     <div ref={calendarRef} className={'max-h-full overflow-scroll'}>
       {months.map((date, idx) => (
-        <div ref={idx == 1 ? currentRef : undefined} key={String(date)}>
-          <p className={'sticky top-0 p-xs bg-buccaneer-500 bg-opacity-20 rounded'}>
-            {dateFormat.format(date)}
-          </p>
-          <MonthCalendar date={date} />
-        </div>
+        <Month ref={idx == 1 ? currentRef : null} key={String(date)} date={date}>
+          <HeadlessCalendar Row={Week} date={date} children={children} />
+        </Month>
       ))}
     </div>
   );
