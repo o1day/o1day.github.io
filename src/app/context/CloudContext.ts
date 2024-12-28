@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {Disk as yandex} from '@shared/clouds/yandex/Disk';
-import {Empty as empty} from '@shared/clouds/Empty';
+import {Empty as empty} from '@shared/api/Empty.ts';
+import {Disk as yandex} from '@shared/api/yandex/Disk.ts';
 
 export type TCloudAccess<T = unknown> = {
   provider: TCloudProvider;

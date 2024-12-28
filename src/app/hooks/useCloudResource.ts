@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useCloudContext} from './useCloudContext';
+import {useCloudContext} from './useCloudContext.ts';
 
 type TResult<T> = [T | undefined, (payload: T) => Promise<void>, TCloudStatus];
 

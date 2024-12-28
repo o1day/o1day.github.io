@@ -1,4 +1,4 @@
-import {InfinityCalendar, WeekHeader} from '@ui/Calendar';
+import {InfinityCalendar, WeekHeader} from '@shared/ui/Calendar';
 
 export const Calendar: React.FC = () => (
   <>

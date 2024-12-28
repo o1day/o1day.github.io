@@ -1,4 +1,4 @@
-import {styled} from '@ui/styled';
+import {styled} from '../../hoc/styled.tsx';
 
 import {HeadlessCalendar} from './Headless';
 import {getWeek} from './utils';

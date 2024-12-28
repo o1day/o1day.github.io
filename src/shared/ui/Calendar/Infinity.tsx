@@ -9,13 +9,19 @@ export const InfinityCalendar: React.FC = () => {
 
   const currentRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
+  const effectFired = useRef(false);
 
   useLayoutEffect(() => {
+    if (effectFired.current) {
+      return;
+    }
+
     currentRef.current?.scrollIntoView();
+    effectFired.current = true;
 
     calendarRef.current?.addEventListener('scroll', (event) => {
       const {scrollTop, scrollHeight, clientHeight} = event.target as HTMLDivElement;
-      const triggerHeight = 100;
+      const triggerHeight = clientHeight / 2;
 
       if (scrollTop < triggerHeight) {
         setMonths((months) => [getPrevMonth(months.at(0)), ...months]);

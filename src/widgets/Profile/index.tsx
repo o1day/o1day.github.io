@@ -1,5 +1,5 @@
-import {ProfileView} from './views/Profile';
-import {StatusView} from './views/Status';
+import {ProfileView} from './ui/Profile.tsx';
+import {StatusView} from './ui/Status.tsx';
 
 export const Profile: React.FC = () => {
   return (

@@ -1,13 +1,14 @@
 import {useMemo} from 'react';
 
-import {YandexAuth} from '@shared/clouds/yandex/Auth';
-import {useLocalStorage} from '@shared/hooks/useLocalStorage';
+import {Profile} from '@widgets/Profile';
+import {Calendar} from '@pages/Calendar';
 
-import {CloudContext, createContextByAccess, emptyAccess} from './context/CloudContext';
-import type {TCloudAccess, TCloudContext} from './context/CloudContext';
-import {Calendar} from './pages/Calendar';
-import {Profile} from './widgets/Profile';
-import {Header, Layout} from './views';
+import {YandexAuth} from '@shared/api/yandex/Auth.tsx';
+import {useLocalStorage} from '@shared/hooks/useLocalStorage.ts';
+
+import type {TCloudAccess, TCloudContext} from './context/CloudContext.ts';
+import {CloudContext, createContextByAccess, emptyAccess} from './context/CloudContext.ts';
+import {Header, Layout} from './ui';
 
 export const App: React.FC = () => {
   const [access, saveAccess] = useLocalStorage<TCloudAccess>('cloud_access', true, emptyAccess);
