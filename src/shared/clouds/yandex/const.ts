@@ -1,4 +1,4 @@
-import {consoleLogger} from '@core/utils/consoleLogger.ts';
+import {consoleLogger} from '@shared/utils/consoleLogger.ts';
 
 export const scriptId = 'yandex-oath-script';
 export const buttonId = 'yandex-suggest-button';

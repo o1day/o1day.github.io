@@ -1,5 +1,4 @@
 import React, {useRef} from 'react';
-
 import {scriptId, scriptUri, authQueryParams, buttonId, suggestButton, logger} from './const';
 
 export const YandexAuth: React.FC<TCloudAuthProps> = ({onAccess}) => {

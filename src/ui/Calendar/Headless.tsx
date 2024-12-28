@@ -7,7 +7,7 @@ type TProps = {
   children: React.FC<Date>;
 };
 
-export const HeadlessMonth: React.FC<TProps> = ({date, children, Row}) => {
+export const HeadlessCalendar: React.FC<TProps> = ({date, children, Row}) => {
   const monthMatrix = useMemo(() => getMonth(date), [date]);
 
   return monthMatrix.map((week, idx) => <Row key={idx}>{week.map(children)}</Row>);

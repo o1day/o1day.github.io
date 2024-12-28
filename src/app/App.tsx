@@ -1,6 +1,7 @@
 import {useMemo} from 'react';
-import {YandexAuth} from '@cloud/yandex/Auth';
-import {useLocalStorage} from '@core/hooks/useLocalStorage';
+
+import {YandexAuth} from '@shared/clouds/yandex/Auth';
+import {useLocalStorage} from '@shared/hooks/useLocalStorage';
 
 import {CloudContext, createContextByAccess, emptyAccess} from './context/CloudContext';
 import type {TCloudAccess, TCloudContext} from './context/CloudContext';

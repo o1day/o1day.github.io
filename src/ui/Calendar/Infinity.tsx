@@ -1,6 +1,7 @@
 import {useState, useLayoutEffect, useRef} from 'react';
-import {getNextMonth, getPrevMonth} from '@libs/rh-calendar/utils.ts';
-import {Month} from './Month.tsx';
+
+import {getNextMonth, getPrevMonth} from './utils.ts';
+import {MonthCalendar} from './Month.tsx';
 
 export const InfinityCalendar: React.FC = () => {
   const dateFormat = Intl.DateTimeFormat(navigator.language, {month: 'long', year: 'numeric'});
@@ -33,7 +34,7 @@ export const InfinityCalendar: React.FC = () => {
           <p className={'sticky top-0 p-xs bg-buccaneer-500 bg-opacity-20 rounded'}>
             {dateFormat.format(date)}
           </p>
-          <Month date={date} />
+          <MonthCalendar date={date} />
         </div>
       ))}
     </div>
