@@ -1,16 +1,15 @@
 import {useState, useLayoutEffect, useRef} from 'react';
 
-import {HeadlessCalendar} from './Headless.tsx';
-import {getNextMonth, getPrevMonth} from './utils.ts';
+import {getNextMonth, getPrevMonth} from './dateUtils.ts';
+import {THeadlessProps} from './Headless.tsx';
+import {InfinityWrapper} from './views.tsx';
 
-type TProps = {
-  Month: React.FC<React.PropsWithChildren<{ref: React.Ref<HTMLElement>; date: Date}>>;
-  Week: React.FC<React.PropsWithChildren>;
-  children: React.FC<Date>;
+type TProps = THeadlessProps & {
+  MonthComponent: React.FC<THeadlessProps & {ref: React.Ref<HTMLElement>}>;
 };
 
-export const InfinityCalendar: React.FC<TProps> = ({Month, Week, children}) => {
-  const [months, setMonths] = useState([getPrevMonth(), new Date(), getNextMonth()]);
+export const InfinityCalendar: React.FC<TProps> = ({MonthComponent, date, ...props}) => {
+  const [months, setMonths] = useState(() => [getPrevMonth(date), date, getNextMonth(date)]);
 
   const currentRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
@@ -39,12 +38,15 @@ export const InfinityCalendar: React.FC<TProps> = ({Month, Week, children}) => {
   }, []);
 
   return (
-    <div ref={calendarRef} className={'max-h-full overflow-scroll'}>
+    <InfinityWrapper ref={calendarRef}>
       {months.map((date, idx) => (
-        <Month ref={idx == 1 ? currentRef : null} key={String(date)} date={date}>
-          <HeadlessCalendar Row={Week} date={date} children={children} />
-        </Month>
+        <MonthComponent
+          key={String(date)}
+          ref={idx == 1 ? currentRef : null}
+          date={date}
+          {...props}
+        />
       ))}
-    </div>
+    </InfinityWrapper>
   );
 };

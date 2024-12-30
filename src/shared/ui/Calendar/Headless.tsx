@@ -1,14 +1,10 @@
-import {useMemo} from 'react';
-import {getMonth} from './utils.ts';
+import {getMonth} from './dateUtils.ts';
 
-type TProps = {
-  date: Date;
-  Row: React.FC<React.PropsWithChildren>;
+export type THeadlessProps = {
+  WeekComponent: React.FC<React.PropsWithChildren>;
   children: React.FC<Date>;
+  date: Date;
 };
 
-export const HeadlessCalendar: React.FC<TProps> = ({date, children, Row}) => {
-  const monthMatrix = useMemo(() => getMonth(date), [date]);
-
-  return monthMatrix.map((week, idx) => <Row key={idx}>{week.map(children)}</Row>);
-};
+export const HeadlessCalendar: React.FC<THeadlessProps> = ({WeekComponent, children, date}) =>
+  getMonth(date).map((week, idx) => <WeekComponent key={idx}>{week.map(children)}</WeekComponent>);
