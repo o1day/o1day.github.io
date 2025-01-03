@@ -1,4 +1,4 @@
-import {getMonth} from './dateUtils.ts';
+import {getMonthDates} from './dateUtils.ts';
 
 export type THeadlessProps = {
   WeekComponent: React.FC<React.PropsWithChildren>;
@@ -7,4 +7,6 @@ export type THeadlessProps = {
 };
 
 export const HeadlessCalendar: React.FC<THeadlessProps> = ({WeekComponent, children, date}) =>
-  getMonth(date).map((week, idx) => <WeekComponent key={idx}>{week.map(children)}</WeekComponent>);
+  getMonthDates(date).map((week, idx) => (
+    <WeekComponent key={idx}>{week.map(children)}</WeekComponent>
+  ));

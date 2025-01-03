@@ -1,5 +1,5 @@
-import {styled} from '@shared/hoc/styled.tsx';
-import {getWeek} from './dateUtils.ts';
+import {styled} from '../../hoc/styled.tsx';
+import {getWeekDates} from './dateUtils.ts';
 
 export const InfinityWrapper = styled('max-h-full overflow-scroll');
 export const MonthWrapper = styled('flex flex-col gap-xs');
@@ -17,7 +17,7 @@ export const MonthTitle: React.FC<{date: Date}> = ({date}) => (
 
 export const WeekTitle: React.FC = () => (
   <WeekHeader>
-    {getWeek(new Date()).map((date) => (
+    {getWeekDates(new Date()).map((date) => (
       <div key={String(date)} className={'font-bold p-xs h-auto'}>
         {Intl.DateTimeFormat(navigator.language, {weekday: 'short'}).format(date)}
       </div>

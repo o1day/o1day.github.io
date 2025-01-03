@@ -1,3 +1,3 @@
-export * from './Infinity';
+export * from './Infinity.tsx';
 export * from './Headless.tsx';
-export * from './Month';
+export * from './Month.tsx';
